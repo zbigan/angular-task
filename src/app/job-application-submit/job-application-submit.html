@@ -1,0 +1,45 @@
+<div class="p-8 max-w-2xl mx-auto">
+  <h2 class="text-2xl font-semibold mb-4">Aplikacijos pateikimas</h2>
+
+  @if (submitted) {
+  <mat-card>
+    <mat-card-title>Duomenys pateikti:</mat-card-title>
+    <mat-card-content>
+      <pre class="whitespace-pre-wrap break-words text-sm"
+        >{{ submissionResult | json }}
+        </pre
+      >
+    </mat-card-content>
+  </mat-card>
+  } @else { @if (isLookingForJob) {
+  <p class="mb-4">Aplikacija pateikta</p>
+  <button mat-raised-button color="primary" (click)="onSubmit()">
+    Patvirtinti
+  </button>
+  } @else {
+  <mat-form-field class="w-full mb-4">
+    <mat-label>Motyvacinis laiškas</mat-label>
+    <textarea
+      matInput
+      rows="6"
+      [formControl]="motivation"
+      placeholder="Įveskite bent 140 simbolių..."
+    ></textarea>
+    <mat-error *ngIf="motivation.hasError('required')">
+      Laukas privalomas
+    </mat-error>
+    <mat-error *ngIf="motivation.hasError('minlength')">
+      Motyvacinis laiškas turi būti bent 140 simbolių
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="motivation.invalid"
+    (click)="onSubmit()"
+  >
+    Pateikti aplikaciją
+  </button>
+  } }
+</div>

@@ -1,4 +1,4 @@
-<div class="w-full flex flex-col gap-4 items-center p-8">
+<form [formGroup]="form" class="w-full flex flex-col gap-4 items-center p-8">
   <mat-form-field>
     <mat-label>Vardas: </mat-label>
     <input matInput id="fistName" type="text" [formControl]="firstName" />
@@ -52,5 +52,16 @@
     <mat-error>Negalima naudoti raidės „a“</mat-error>
     }
   </mat-form-field>
+  } @if (specLevel.value === 'senior') {
+  <div class="mt-8">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onNextStep()"
+      [disabled]="form.invalid"
+    >
+      Sekantis žingsnis
+    </button>
+  </div>
   }
-</div>
+</form>
