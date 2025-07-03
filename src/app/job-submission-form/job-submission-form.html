@@ -37,5 +37,20 @@
     <mat-error>Neteisingas atsakymas</mat-error>
     }
   </mat-form-field>
+  } @if (specLevel.value === 'mid') {
+  <mat-form-field>
+    <mat-label>Apibūdink save</mat-label>
+    <textarea
+      matInput
+      rows="3"
+      [formControl]="description"
+      placeholder="Be raidės a"
+    ></textarea>
+    @if (description.hasError('required')) {
+    <mat-error>Laukas yra privalomas</mat-error>
+    } @if (description.hasError('pattern')) {
+    <mat-error>Negalima naudoti raidės „a“</mat-error>
+    }
+  </mat-form-field>
   }
 </div>

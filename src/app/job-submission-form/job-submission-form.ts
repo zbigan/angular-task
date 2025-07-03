@@ -23,8 +23,9 @@ export class JobSubmissionForm {
   lastName = new FormControl("", [Validators.required]);
   email = new FormControl("", [Validators.required, Validators.email]);
   isLookingForJob = new FormControl(true);
-  specLevel = new FormControl(null);
+  specLevel = new FormControl(null, [Validators.required]);
   twoPlusTwo = new FormControl(null);
+  description = new FormControl("");
 
   specLevels = [
     { value: "junior", viewValue: "Junior" },
@@ -39,11 +40,25 @@ export class JobSubmissionForm {
           Validators.required,
           Validators.pattern(/^4$/),
         ]);
-      } else {
+        this.description.clearValidators();
+        this.description.reset();
+      } else if (value === "mid") {
+        this.description.setValidators([
+          Validators.required,
+          Validators.pattern(/^[^aA]*$/),
+        ]);
         this.twoPlusTwo.clearValidators();
         this.twoPlusTwo.reset();
+      } else {
+        // senior
+        this.twoPlusTwo.clearValidators();
+        this.twoPlusTwo.reset();
+        this.description.clearValidators();
+        this.description.reset();
       }
+
       this.twoPlusTwo.updateValueAndValidity();
+      this.description.updateValueAndValidity();
     });
   }
 }
