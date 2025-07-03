@@ -1,44 +1,59 @@
-<form [formGroup]="form" class="w-full flex flex-col gap-4 items-center p-8">
-  <mat-form-field>
-    <mat-label>Vardas: </mat-label>
+<form
+  [formGroup]="form"
+  class="w-full max-w-2xl mx-auto bg-white shadow-md rounded-xl p-8 m-4 space-y-6"
+>
+  <h1 class="text-2xl font-semibold text-center text-gray-800 mb-4">
+    Kandidato informacija
+  </h1>
+
+  <mat-form-field class="w-full">
+    <mat-label>Vardas</mat-label>
     <input matInput id="fistName" type="text" [formControl]="firstName" />
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Pavardė: </mat-label>
+  <mat-form-field class="w-full">
+    <mat-label>Pavardė</mat-label>
     <input matInput id="lastName" type="text" [formControl]="lastName" />
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>El. paštas: </mat-label>
+  <mat-form-field class="w-full">
+    <mat-label>El. paštas</mat-label>
     <input matInput id="email" type="email" [formControl]="email" />
   </mat-form-field>
 
-  <mat-slide-toggle id="isLookingForJob" [formControl]="isLookingForJob">
-    Ar ieškai darbo?
-  </mat-slide-toggle>
+  <div class="w-full flex justify-start">
+    <mat-slide-toggle [formControl]="isLookingForJob">
+      Ar ieškai darbo?
+    </mat-slide-toggle>
+  </div>
 
-  <mat-form-field>
+  <mat-form-field class="w-full">
     <mat-label>Kokio lygio specialistas esi?</mat-label>
     <mat-select id="specLevel" [formControl]="specLevel">
       @for (specLevel of specLevels; track specLevel) {
-      <mat-option [value]="specLevel.value">{{
-        specLevel.viewValue
-      }}</mat-option>
+      <mat-option [value]="specLevel.value">
+        {{ specLevel.viewValue }}
+      </mat-option>
       }
     </mat-select>
   </mat-form-field>
 
   @if (specLevel.value === 'junior') {
-  <mat-form-field>
+  <mat-form-field class="w-full">
     <mat-label>2 + 2</mat-label>
-    <input id="twoPlusTwo" matInput type="number" [formControl]="twoPlusTwo" />
+    <input
+      matInput
+      id="twoPlusTwo"
+      type="number"
+      [formControl]="twoPlusTwo"
+      placeholder="Įrašyk teisingą atsakymą"
+    />
     @if (twoPlusTwo.invalid && twoPlusTwo.touched) {
     <mat-error>Neteisingas atsakymas</mat-error>
     }
   </mat-form-field>
   } @if (specLevel.value === 'mid') {
-  <mat-form-field>
+  <mat-form-field class="w-full">
     <mat-label>Apibūdink save</mat-label>
     <textarea
       matInput
@@ -53,12 +68,13 @@
     }
   </mat-form-field>
   } @if (specLevel.value === 'senior') {
-  <div class="mt-8">
+  <div class="w-full text-end">
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       (click)="onNextStep()"
       [disabled]="form.invalid"
+      class="mt-4"
     >
       Sekantis žingsnis
     </button>
