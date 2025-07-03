@@ -1,0 +1,41 @@
+<div class="w-full flex flex-col gap-4 items-center p-8">
+  <mat-form-field>
+    <mat-label>Vardas: </mat-label>
+    <input matInput id="fistName" type="text" [formControl]="firstName" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Pavardė: </mat-label>
+    <input matInput id="lastName" type="text" [formControl]="lastName" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>El. paštas: </mat-label>
+    <input matInput id="email" type="email" [formControl]="email" />
+  </mat-form-field>
+
+  <mat-slide-toggle id="isLookingForJob" [formControl]="isLookingForJob">
+    Ar ieškai darbo?
+  </mat-slide-toggle>
+
+  <mat-form-field>
+    <mat-label>Kokio lygio specialistas esi?</mat-label>
+    <mat-select id="specLevel" [formControl]="specLevel">
+      @for (specLevel of specLevels; track specLevel) {
+      <mat-option [value]="specLevel.value">{{
+        specLevel.viewValue
+      }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (specLevel.value === 'junior') {
+  <mat-form-field>
+    <mat-label>2 + 2</mat-label>
+    <input id="twoPlusTwo" matInput type="number" [formControl]="twoPlusTwo" />
+    @if (twoPlusTwo.invalid && twoPlusTwo.touched) {
+    <mat-error>Neteisingas atsakymas</mat-error>
+    }
+  </mat-form-field>
+  }
+</div>
